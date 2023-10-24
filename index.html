@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sam_dash.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    
+    <title>부동산매물</title>
+</head>
+<body>
+    <header>
+        <h1 class="icon-heading">매물 찾아보기</h1>
+    </header>
+
+    <!-- main 부분 -->
+    <main>
+        <section id="dashboard-content">
+            <div class="widget">
+                <h2>위치 지정</h2>
+                <p>매물을 확인하고 싶은 지역을 지도에서 선택</p>
+            </div>
+            <div class="widget">
+                <h2>검색하기</h2>
+                <p>지도 하단의 '검색하기' 버튼을 클릭<br></p>
+            </div>
+        </section>
+        <br>       
+
+        <div class="container">
+        <section class="section" id="section-3">
+            <h1>지도</h1>
+            <div id="map" style="width: 100%; height: 500px; margin:auto"></div>
+            <code id="snippet" class="snippet"></code>
+        </section>
+        </div>
+        
+        <br>
+        <div class="container">
+            <button type="button" class="btn btn-secondary" id="toggleButton">매물 확인하기</button>
+        </div><br>
+
+        <div class="container">
+        <section class="dashboard-content" id="section-3">
+            <table id="myTable" class="table caption-top table-secondary table-striped table-hover" width="100%" style="display: none;">
+            <caption> 양재동 매물 리스트 </caption>
+            <thead>
+                <tr class="table-dark">
+                    <th>매물</th>
+                    <th>월세</th>
+                    <th>전세</th>
+                    <th>가격</th>
+                    <th>소재지</th>
+                    <th>특징</th>
+                    <th>공급/전용면적</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <!-- 여기에 데이터를 추가할 것입니다. -->
+            </tbody>
+            </table>
+        </section>  
+        </div>
+        
+        
+        <!-- 각자 발급받은 Client ID 값 넣기 -->
+        <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=awp9d8ebup"></script>
+        <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=awp9d8ebup&submodules=geocoder"></script>
+        <script id="code">
+
+            let markers = new Array();
+            let infoWindows = new Array(); // 변수 이름 수정: infoWindow -> infoWindows
+
+            var map = new naver.maps.Map('map', {
+                center: new naver.maps.LatLng(37.52914341133875, 126.99554368848251),
+                zoom: 15,
+                minZoom: 8,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: naver.maps.ZoomControlStyle.SMALL,
+                    position: naver.maps.Position.TOP_RIGHT
+                },
+            });
+
+            var marker = new naver.maps.Marker({
+                position: new naver.maps.LatLng(37.52914341133875, 126.99554368848251),
+                map: map,
+                title: "폴리텍",
+                icon: {
+                    content: '<img src="icon1.png" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 32px; height: 32px; left: 0px; top: 0px;">',
+                    size: new naver.maps.Size(32, 32),
+                    anchor: new naver.maps.Point(16, 32)
+                }
+            });
+
+            var infoWindow = new naver.maps.InfoWindow({
+                borderWidth: 2,
+                content: '<div style="width:130px;text-align:center;padding:10px;">용산구 보광동</div>'
+            });
+
+            naver.maps.Event.addListener(map, 'click', function(e) {
+                marker.setPosition(e.latlng);
+            });
+
+            markers.push(marker);
+            infoWindows.push(infoWindow); // 변수 이름 수정: infoWindow -> infoWindows
+
+            function getClickHandler(seq) {
+                return function (e) {
+                    var marker = markers[seq];
+                    var infoWindow = infoWindows[seq];
+                    if (infoWindow.getMap()) {
+                        infoWindow.close();
+                    } else {
+                        infoWindow.open(map, marker);
+                    }
+                }
+            }
+
+            for (var i = 0, ii = markers.length; i < ii; i++) {
+                naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
+            }
+
+            
+        </script>
+        <script>
+            // CSV 파일을 읽어와서 테이블에 데이터를 추가하는 함수
+            function addDataToTable() {
+                fetch('real_estate.csv') // CSV 파일 가져오기
+                    .then(response => response.text())
+                    .then(data => {
+                        // CSV 데이터를 파싱
+                        const rows = data.trim().split('\n').map(row => row.split(','));
+                        
+                        // 데이터를 HTML 테이블에 추가
+                        const tableBody = document.querySelector('#myTable tbody');
+                        rows.forEach(row => {
+                            const rowData = row.map(cell => `<td>${cell}</td>`).join('');
+                            tableBody.innerHTML += `<tr>${rowData}</tr>`;
+                        });
+                        
+                        // 테이블 표시
+                        document.getElementById('myTable').style.display = 'table';
+                    })
+                    .catch(error => console.error(error));
+            }
+    
+            // 페이지가 로드된 후 데이터를 추가
+            window.addEventListener('load', addDataToTable);
+        </script>
+
+    </main>
+    <footer>
+        <p>&copy;&copy;&copy; 부동산 매물 검색 &copy;&copy;&copy;</p>
+    </footer>
+    <script src="sam_dash.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> -->
+</body>
+</html>
+

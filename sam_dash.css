@@ -1,0 +1,96 @@
+/* Reset CSS */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Basic Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+}
+
+.icon-heading::before {
+    content: "\f07c"; /* Font Awesome 아이콘 코드 */
+    font-family: 'FontAwesome';
+    margin-right: 10px;
+  }
+
+nav ul {
+    list-style-type: none;
+    background-color: #333;
+    overflow: hidden;
+}
+
+
+nav li {
+    float: left;
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+main {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#dashboard-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.widget {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex-basis: 48%;
+}
+
+#grad1 {
+    height: 300px;
+    width: 300px;
+    background-image: conic-gradient(yellow 45deg,black 45deg,
+     black 135deg, yellow 135deg, yellow 180deg, orange , red);
+    border-radius: 50%;
+  }
+
+#animation {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: relative;
+    animation: myfirst 5s linear 2s infinite alternate;
+}
+
+@keyframes myfirst {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:200px; top:0px;}
+    50%  {background-color:rgb(29, 226, 23); left:200px; top:200px;}
+    75%  {background-color:rgb(12, 84, 151); left:0px; top:200px;}
+    100% {background-color:rgb(205, 40, 238); left:0px; top:0px;}
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+}
