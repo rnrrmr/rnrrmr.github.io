@@ -131,7 +131,16 @@
                     .then(response => response.text())
                     .then(data => {
                         // CSV 데이터를 파싱
-                        const rows = data.trim().split('\n').map(row => row.split(','));
+                        const rows = data.trim().split('\n').map(row => {
+                            const rowArray = row.split(',');
+                            return rowArray.map(cell => {
+                                // 쉼표로 둘러싸인 데이터는 큰따옴표를 제거
+                                if (cell.startsWith('"') && cell.endsWith('"')) {
+                                    return cell.slice(1, -1);
+                                }
+                                return cell;
+                            });
+                        });
                         
                         // 데이터를 HTML 테이블에 추가
                         const tableBody = document.querySelector('#myTable tbody');
