@@ -30,7 +30,6 @@
 
         <div class="container">
         <section class="section" id="section-3">
-            <h1>지도</h1>
             <div id="map" style="width: 100%; height: 500px; margin:auto"></div>
             <code id="snippet" class="snippet"></code>
         </section>
@@ -45,12 +44,12 @@
         <section class="dashboard-content" id="section-3">
             <table id="myTable" class="table caption-top table-secondary table-striped table-hover" width="100%" style="display: none;">
             <caption> 양재동 매물 리스트 </caption>
-            <thead class="table-dark">
-               <!-- thead 데이터 추가 위치 -->
-            </thead>
-            <tbody class="table-group-divider">
-                <!-- 여기에 데이터를 추가할 것입니다. -->
-            </tbody>
+                <thead class="table-dark">
+                   <!-- thead 데이터 추가 위치 -->
+                </thead>
+                <tbody class="table-group-divider">
+                    <!-- 여기에 데이터를 추가할 것입니다. -->
+                </tbody>
             </table>
         </section>  
         </div>
@@ -114,9 +113,8 @@
                 naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
             }
 
-            
         </script>
-<!--         <script>
+        <script>
             // CSV 파일을 읽어와서 테이블에 데이터를 추가하는 함수
             function addDataToTable() {
                 fetch('real_estate.csv') // CSV 파일 가져오기
@@ -149,7 +147,7 @@
     
             // 페이지가 로드된 후 데이터를 추가
             window.addEventListener('load', addDataToTable);
-        </script> -->
+        </script>
         
     </main>
     <footer>
