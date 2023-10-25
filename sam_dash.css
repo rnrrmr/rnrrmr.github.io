@@ -17,6 +17,10 @@ header {
     padding: 10px;
 }
 
+#myTable {
+    display: none;
+}
+
 .icon-heading::before {
     content: "\f07c"; /* Font Awesome 아이콘 코드 */
     font-family: 'FontAwesome';
