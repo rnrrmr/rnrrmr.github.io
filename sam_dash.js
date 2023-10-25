@@ -18,28 +18,28 @@ toggleButton.addEventListener("click", function() {
     }
 });
 
-function addDataToTable() {
-    fetch('real_estate.csv') // CSV 파일 가져오기
-        .then(response => response.text())
-        .then(data => {
-            // CSV 데이터를 파싱
-            const rows = data.trim().split('\n').map(row => row.split(','));
+// function addDataToTable() {
+//     fetch('real_estate.csv') // CSV 파일 가져오기
+//         .then(response => response.text())
+//         .then(data => {
+//             // CSV 데이터를 파싱
+//             const rows = data.trim().split('\n').map(row => row.split(','));
             
-            // 데이터를 HTML 테이블에 추가
-            const tableBody = document.querySelector('#myTable tbody');
-            rows.forEach(row => {
-                const rowData = row.map(cell => `<td>${cell}</td>`).join('');
-                tableBody.innerHTML += `<tr>${rowData}</tr>`;
-            });
+//             // 데이터를 HTML 테이블에 추가
+//             const tableBody = document.querySelector('#myTable tbody');
+//             rows.forEach(row => {
+//                 const rowData = row.map(cell => `<td>${cell}</td>`).join('');
+//                 tableBody.innerHTML += `<tr>${rowData}</tr>`;
+//             });
             
-            // 테이블 표시
-            document.getElementById('myTable').style.display = 'table';
-        })
-        .catch(error => console.error(error));
-}
+//             // 테이블 표시
+//             document.getElementById('myTable').style.display = 'table';
+//         })
+//         .catch(error => console.error(error));
+// }
 
-// 페이지가 로드된 후 데이터를 추가
-window.addEventListener('load', addDataToTable);
+// // 페이지가 로드된 후 데이터를 추가
+// window.addEventListener('load', addDataToTable);
 
 
 // function insertAfter(newNode, referenceNode) {
