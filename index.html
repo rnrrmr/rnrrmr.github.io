@@ -45,16 +45,8 @@
         <section class="dashboard-content" id="section-3">
             <table id="myTable" class="table caption-top table-secondary table-striped table-hover" width="100%" style="display: none;">
             <caption> 양재동 매물 리스트 </caption>
-            <thead>
-                <tr class="table-dark">
-                    <th>매물</th>
-                    <th>월세</th>
-                    <th>전세</th>
-                    <th>가격</th>
-                    <th>소재지</th>
-                    <th>특징</th>
-                    <th>공급/전용면적</th>
-                </tr>
+            <thead class="table-dark">
+               <!-- thead 데이터 추가 위치 -->
             </thead>
             <tbody class="table-group-divider">
                 <!-- 여기에 데이터를 추가할 것입니다. -->
@@ -132,8 +124,17 @@
                     .then(data => {
                         // CSV 데이터를 파싱
                         const rows = data.trim().split('\n').map(row => row.split(','));
+
+                        // 첫번째 행을 thead로
+                        const theadRow = row.shift();
+                        const tableHead = document.querySelector('#myTable thead tr');
                         
-                        // 데이터를 HTML 테이블에 추가
+                        // 데이터를 HTML 테이블의 thead에 추가
+                        theadRow.forEach(cell => {
+                            tableHead.innerHTML += `<th>${cell}</th>`;
+                        });
+            
+                        // 데이터를 HTML 테이블의 tbody에 추가
                         const tableBody = document.querySelector('#myTable tbody');
                         rows.forEach(row => {
                             const rowData = row.map(cell => `<td>${cell}</td>`).join('');
