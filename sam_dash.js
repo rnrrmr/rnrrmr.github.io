@@ -25,7 +25,18 @@ function addDataToTable() {
             // CSV 데이터를 파싱
             const rows = data.trim().split('\n').map(row => row.split(','));
             
-            // 데이터를 HTML 테이블에 추가
+            // 첫 번째 행을 thead로
+            const theadRow = rows.shift();
+            const tableHead = document.querySelector('#myTable thead');
+            
+            // 데이터를 HTML 테이블의 thead에 추가
+            theadRow.forEach(cell => {
+                const th = document.createElement('th');
+                th.textContent = cell;
+                tableHead.appendChild(th);
+            });
+            
+            // 데이터를 HTML 테이블의 tbody에 추가
             const tableBody = document.querySelector('#myTable tbody');
             rows.forEach(row => {
                 const rowData = row.map(cell => `<td>${cell}</td>`).join('');
@@ -37,3 +48,4 @@ function addDataToTable() {
         })
         .catch(error => console.error(error));
 }
+
