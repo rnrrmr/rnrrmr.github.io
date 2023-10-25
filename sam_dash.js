@@ -18,28 +18,38 @@ toggleButton.addEventListener("click", function() {
     }
 });
 
-// function addDataToTable() {
-//     fetch('real_estate.csv') // CSV 파일 가져오기
-//         .then(response => response.text())
-//         .then(data => {
-//             // CSV 데이터를 파싱
-//             const rows = data.trim().split('\n').map(row => row.split(','));
-            
-//             // 데이터를 HTML 테이블에 추가
-//             const tableBody = document.querySelector('#myTable tbody');
-//             rows.forEach(row => {
-//                 const rowData = row.map(cell => `<td>${cell}</td>`).join('');
-//                 tableBody.innerHTML += `<tr>${rowData}</tr>`;
-//             });
-            
-//             // 테이블 표시
-//             document.getElementById('myTable').style.display = 'table';
-//         })
-//         .catch(error => console.error(error));
-// }
+<!-- CSV 파일을 읽어와서 테이블에 데이터를 추가하는 함수 -->
+function addDataToTable() {
+    fetch('real_estate.csv') // CSV 파일 가져오기
+        .then(response => response.text())
+        .then(data => {
+            // CSV 데이터를 파싱
+            const rows = data.trim().split('\n').map(row => row.split(','));
 
-// // 페이지가 로드된 후 데이터를 추가
-// window.addEventListener('load', addDataToTable);
+            // 첫 번째 행을 thead로 사용
+            const theadRow = rows.shift();
+            const tableHead = document.querySelector('#myTable thead tr');
+
+            // 데이터를 HTML 테이블의 thead에 추가
+            theadRow.forEach(cell => {
+                tableHead.innerHTML += `<th>${cell}</th>`;
+            });
+
+            // 데이터를 HTML 테이블의 tbody에 추가
+            const tableBody = document.querySelector('#myTable tbody');
+            rows.forEach(row => {
+                const rowData = row.map(cell => `<td>${cell}</td>`).join('');
+                tableBody.innerHTML += `<tr>${rowData}</tr>`;
+            });
+
+            // 테이블 표시
+            document.getElementById('myTable').style.display = 'table';
+        })
+        .catch(error => console.error(error));
+}
+
+// 페이지가 로드된 후 데이터를 추가
+window.addEventListener('load', addDataToTable);
 
 
 // function insertAfter(newNode, referenceNode) {
