@@ -121,7 +121,39 @@
                 naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
             }
 
-        </script>        
+        </script>     
+        <script>
+            function addDataToTable() {
+                fetch('real_estate.csv') // CSV 파일 가져오기
+                    .then(response => response.text())
+                    .then(data => {
+                        // CSV 데이터를 파싱
+                        const rows = data.trim().split('\n').map(row => row.split(','));
+                        
+                        // 첫 번째 행을 thead로
+                        const theadRow = rows.shift();
+                        const tableHead = document.querySelector('#myTable thead');
+                        
+                        // 데이터를 HTML 테이블의 thead에 추가
+                        theadRow.forEach(cell => {
+                            const th = document.createElement('th');
+                            th.textContent = cell;
+                            tableHead.appendChild(th);
+                        });
+                        
+                        // 데이터를 HTML 테이블의 tbody에 추가
+                        const tableBody = document.querySelector('#myTable tbody');
+                        rows.forEach(row => {
+                            const rowData = row.map(cell => `<td>${cell}</td>`).join('');
+                            tableBody.innerHTML += `<tr>${rowData}</tr>`;
+                        });
+                        
+                        // 테이블 표시
+                        document.getElementById('myTable').style.display = 'table';
+                    })
+                    .catch(error => console.error(error));
+            }
+        </script>
     </main>
     <footer>
         <p>&copy;&copy;&copy; 부동산 매물 검색 &copy;&copy;&copy;</p>
