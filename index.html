@@ -78,15 +78,8 @@
             <table id="myTable" class="table caption-top table-secondary table-striped table-hover" width="100%" style="display: none;">
             <caption> 양재동 매물 리스트 </caption>
                 <thead class="table-dark">
-<!--                     <tr class="table-dark">
-                        <th>매물</th>
-                        <th>월세</th>
-                        <th>전세</th>
-                        <th>가격</th>
-                        <th>소재지</th>
-                        <th>특징</th>
-                        <th>공급/전용면적</th>
-                    </tr> -->
+                    <tr id="table-header">
+                    </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     <!-- csv 데이터 추가 위치 -->
@@ -268,13 +261,19 @@
                 .then(data => {
                     // CSV 데이터를 파싱
                     const rows = data.trim().split('\n').map(row => row.split(','));
-        
+
                     // 데이터를 HTML 테이블에 추가
+                    const tableHeader = document.querySelector('#table-header');
                     const tableBody = document.querySelector('#myTable tbody');
-                    rows.forEach(row => {
-                        const rowData = row.map(cell => `<td>${cell}</td>`).join('');
+                    // 첫 번째 행을 thead에 추가
+                    const firstRowData = rows[0].map(cell => `<th>${cell}</th>`).join('');
+                    tableHeader.innerHTML = firstRowData;
+        
+                    // 나머지 행을 tbody에 추가
+                    for (let i = 1; i < rows.length; i++) {
+                        const rowData = rows[i].map(cell => `<td>${cell}</td>`).join('');
                         tableBody.innerHTML += `<tr>${rowData}</tr>`;
-                    });
+                    }
         
                     // 테이블 표시
                     document.getElementById('myTable').style.display = 'table';
