@@ -10,27 +10,33 @@
     <title>부동산매물</title>
 </head>
 <body>
+    <!-- main 부분 -->
     <header>
-        <h1 class="icon-heading">매물 찾아보기</h1>
+        <h1>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-houses" viewBox="0 0 16 16">
+                <path d="M5.793 1a1 1 0 0 1 1.414 0l.647.646a.5.5 0 1 1-.708.708L6.5 1.707 2 6.207V12.5a.5.5 0 0 0 .5.5.5.5 0 0 1 0 1A1.5 1.5 0 0 1 1 12.5V7.207l-.146.147a.5.5 0 0 1-.708-.708L5.793 1Zm3 1a1 1 0 0 1 1.414 0L12 3.793V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v3.293l1.854 1.853a.5.5 0 0 1-.708.708L15 8.207V13.5a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 4 13.5V8.207l-.146.147a.5.5 0 1 1-.708-.708L8.793 2Zm.707.707L5 7.207V13.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V7.207l-4.5-4.5Z"/>
+            </svg>
+            부동산 매물찾기
+        </h1>
     </header>
 
-    <!-- main 부분 -->
     <main>
-        <section id="dashboard-content">
-            <div class="widget">
-                <h2>위치 지정</h2>
-                <p>매물을 확인하고 싶은 지역을 지도에서 선택</p>
+        <div class="px-4 text-center">
+            <div class="col-lg-6 mx-auto">
+                <p class="lead mb-4">1. 검색할 위치를 지도에서 선택<br>2. 지도 하단의 매물 확인하기 버튼 클릭</p>
+                </div>
             </div>
-            <div class="widget">
-                <h2>검색하기</h2>
-                <p>지도 하단의 '매물 확인하기' 버튼을 클릭<br></p>
-            </div>
-        </section>
-        <br>       
+        </div>
 
         <div class="container">
         <section class="section" id="section-3">
-            <div id="map" style="width: 100%; height: 500px; margin:auto"></div>
+            
+            <div id="map" style="width: 100%; height: 600px; position: relative; overflow: hidden; background: rgb(248, 249, 250);">
+                <!-- <div class="search">
+                    <input id="address" type="text" placeholder="검색할 주소" value="">
+                    <input id="submit" type="button" value="주소 검색">
+                </div> -->
+            </div>
             <code id="snippet" class="snippet"></code>
         </section>
         </div>
@@ -38,25 +44,52 @@
         <br>
         <div class="container">
             <button type="button" class="btn btn-secondary" id="toggleButton">매물 확인하기</button>
-        </div><br>
+        </div>
 
         <div class="container">
-        <section class="dashboard-content" id="section-3">
+        <section class="dashboard-content">
+            
+            <section id="clickbutton" style="display: none;" >
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                    <b>전세</b>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                    <b>월세</b>
+                    </label>
+                </div>
+            </section>
+
+            <section class="range-slider container2" id="slider" style="display: none;"">
+                <span class="slider-title">월세가격</span>
+                <span class="output outputOne">0</span>
+                <span class="output outputTwo">100</span>
+                <span class="full-range"></span>
+                <span class="incl-range"></span>
+                <input name="rangeOne" value="0" min="0" max="100" step="1" type="range">
+                <input name="rangeTwo" value="100" min="0" max="100" step="1" type="range">
+            </section>
+            <br>
+
             <table id="myTable" class="table caption-top table-secondary table-striped table-hover" width="100%" style="display: none;">
             <caption> 양재동 매물 리스트 </caption>
                 <thead>
-                <tr class="table-dark">
-                    <th>매물</th>
-                    <th>월세</th>
-                    <th>전세</th>
-                    <th>가격</th>
-                    <th>소재지</th>
-                    <th>특징</th>
-                    <th>공급/전용면적</th>
-                </tr>
+                    <tr class="table-dark">
+                        <th>매물</th>
+                        <th>월세</th>
+                        <th>전세</th>
+                        <th>가격</th>
+                        <th>소재지</th>
+                        <th>특징</th>
+                        <th>공급/전용면적</th>
+                    </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <!-- 여기에 데이터를 추가할 것입니다. -->
+                    <!-- csv 데이터 추가 위치 -->
                 </tbody>
             </table>
         </section>  
@@ -66,94 +99,8 @@
         <!-- 각자 발급받은 Client ID 값 넣기 -->
         <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=awp9d8ebup"></script>
         <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=awp9d8ebup&submodules=geocoder"></script>
-        <script id="code">
 
-            let markers = new Array();
-            let infoWindows = new Array(); // 변수 이름 수정: infoWindow -> infoWindows
-
-            var map = new naver.maps.Map('map', {
-                center: new naver.maps.LatLng(37.52914341133875, 126.99554368848251),
-                zoom: 15,
-                minZoom: 8,
-                zoomControl: true,
-                zoomControlOptions: {
-                    style: naver.maps.ZoomControlStyle.SMALL,
-                    position: naver.maps.Position.TOP_RIGHT
-                },
-            });
-
-            var marker = new naver.maps.Marker({
-                position: new naver.maps.LatLng(37.52914341133875, 126.99554368848251),
-                map: map,
-                title: "폴리텍",
-                icon: {
-                    content: '<img src="icon1.png" alt="" style="margin: 0px; padding: 0px; border: 0px solid transparent; display: block; max-width: none; max-height: none; -webkit-user-select: none; position: absolute; width: 32px; height: 32px; left: 0px; top: 0px;">',
-                    size: new naver.maps.Size(32, 32),
-                    anchor: new naver.maps.Point(16, 32)
-                }
-            });
-
-            var infoWindow = new naver.maps.InfoWindow({
-                borderWidth: 2,
-                content: '<div style="width:130px;text-align:center;padding:10px;">용산구 보광동</div>'
-            });
-
-            naver.maps.Event.addListener(map, 'click', function(e) {
-                marker.setPosition(e.latlng);
-            });
-
-            markers.push(marker);
-            infoWindows.push(infoWindow); // 변수 이름 수정: infoWindow -> infoWindows
-
-            function getClickHandler(seq) {
-                return function (e) {
-                    var marker = markers[seq];
-                    var infoWindow = infoWindows[seq];
-                    if (infoWindow.getMap()) {
-                        infoWindow.close();
-                    } else {
-                        infoWindow.open(map, marker);
-                    }
-                }
-            }
-
-            for (var i = 0, ii = markers.length; i < ii; i++) {
-                naver.maps.Event.addListener(markers[i], 'click', getClickHandler(i));
-            }
-
-        </script>     
-        <script>
-            function addDataToTable() {
-                fetch('real_estate.csv') // CSV 파일 가져오기
-                    .then(response => response.text())
-                    .then(data => {
-                        // CSV 데이터를 파싱
-                        const rows = data.trim().split('\n').map(row => row.split(','));
-                        
-                        // 첫 번째 행을 thead로
-                        const theadRow = rows.shift();
-                        const tableHead = document.querySelector('#myTable thead');
-                        
-                        // 데이터를 HTML 테이블의 thead에 추가
-                        theadRow.forEach(cell => {
-                            const th = document.createElement('th');
-                            th.textContent = cell;
-                            tableHead.appendChild(th);
-                        });
-                        
-                        // 데이터를 HTML 테이블의 tbody에 추가
-                        const tableBody = document.querySelector('#myTable tbody');
-                        rows.forEach(row => {
-                            const rowData = row.map(cell => `<td>${cell}</td>`).join('');
-                            tableBody.innerHTML += `<tr>${rowData}</tr>`;
-                        });
-                        
-                        // 테이블 표시
-                        document.getElementById('myTable').style.display = 'table';
-                    })
-                    .catch(error => console.error(error));
-            }
-        </script>
+        
     </main>
     <footer>
         <p>&copy;&copy;&copy; 부동산 매물 검색 &copy;&copy;&copy;</p>
@@ -162,4 +109,3 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script> -->
 </body>
 </html>
-
