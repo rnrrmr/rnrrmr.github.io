@@ -10,18 +10,60 @@ body {
     background-color: #f0f0f0;
 }
 
+@font-face {
+    font-family: 'KBO-Dia-Gothic_bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'TTWanjudaedunsancheB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/TTWanjudaedunsancheB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'omyu_pretty';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1 {
+    font-family: 'KBO-Dia-Gothic_bold';
+}
+
+p,h4 {
+    font-family: "NanumSquareNeo-Variable";
+}
+
+h5 {
+    font-family: 'omyu_pretty';
+}
+
+
 header {
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 10px;
+    padding-top: 20px;
 }
 
 .icon-heading::before {
     content: "\f07c"; /* Font Awesome 아이콘 코드 */
     font-family: 'FontAwesome';
     margin-right: 10px;
-  }
+}
 
 
 main {
@@ -66,16 +108,6 @@ main {
 }
 
 
-.widget {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    flex-basis: 48%;
-}
-
-
-
 footer {
     text-align: center;
     padding: 10px;
@@ -89,132 +121,7 @@ footer {
     left: 30px;
 }
 
-.slider-title {
-    position: absolute;
-    left: -55%; /* 타이틀을 슬라이더의 왼쪽에 배치 */
-    top: 5px; /* 상단 여백 조절 */
-    color: #333; /* 타이틀 텍스트 색상 설정 */
-    font-weight: bold;
-}
-
-.range-slider {
-    position: relative;
-    width: 200px;
-    height: 35px;
-    text-align: left;
-}
-
-.range-slider input {
-    pointer-events: none;
-    position: absolute;
-    overflow: hidden;
-    left: 0;
-    top: 15px;
-    width: 200px;
-    outline: none;
-    height: 18px;
-    margin: 0;
-    padding: 0;
-}
-
-.range-slider input::-webkit-slider-thumb {
-    pointer-events: all;
-    position: relative;
-    z-index: 1;
-    outline: 0;
-}
-
-.rangeValue {
-    width: 30px;
-}
-
-.output {
-    position: absolute;
-    border: 1px solid #999;
-    width: 40px;
-    height: 30px;
-    text-align: center;
-    color: #999;
-    border-radius: 4px;
-    display: inline-block;
-    font: bold 15px/30px Helvetica, Arial;
-    bottom: 75%;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
-
-.output.outputTwo {
-    left: 100%;
-}
-
-.container2 {
-    position: relative;
-    top: 0%;
-    left: 50%;
-    transform: translate(-50%,-0%);
-}
-
-input[type=range] {
-    appearance: none;
-    -webkit-appearance: none;
-    background: none;
-    width: 100%;
-}
-
-input[type=range]::-webkit-slider-runnable-track {
-    height: 5px;
-    border: none;
-    border-radius: 3px;
-    background: transparent;
-}
-
-input[type=range]::-ms-track {
-    height: 5px;
-    background: transparent;
-    border: none;
-    border-radius: 3px;
-}
-
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    border: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: #555;
-    margin-top: -5px;
-    position: relative;
-    z-index: 10000;
-}
-
-input[type=range]::-ms-thumb {
-    appearance: none;
-    -webkit-appearance: none;
-    border: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: #555;
-    margin-top: -5px;
-    position: relative;
-    z-index: 10000;
-}
-
-input[type=range]:focus {
-    outline: none;
-}
-
-.full-range,
-.incl-range {
-    width: 100%;
-    height: 5px;
-    left: 0;
-    top: 21px;
-    position: absolute;
-    background: #DDD;
-}
-
-.incl-range {
-    background: gold;
+.form-group-horizontal select {
+    width: 150px; 
 }
 
