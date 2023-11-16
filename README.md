@@ -1,11 +1,23 @@
-# rrnrrmr.github.io
-myMapPage release
+# 네이버 부동산 매물 정보 스크래핑
+https://rnrrmr.github.io
+
+
 
 
 정적 페이지로 정보를 디스플레이 조금은 보기좋게 페이지를 디자인
 거기 안에는 내가 활용한 도구나 프레임워크들이 제시되어 있어야함
 
-# 문제사항
+
+# 1. 작업환경 및 도구
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=rnrrmr)](https://github.com/anuraghazra/github-readme-stats)
+
+# 2. 데이터 스크래핑
+
+# 3. 웹 페이지 생성 및 호스팅
+
+# 4. 평가 및 결과
+
+## 문제사항
 1. 매물을 클릭해서 나오는 상세페이지에서
 1-1. 상단 이미지가 없어서 div 구조가 바뀌는 경우
     처음에 이미지가 있는지 없는지 if로 나눠서 접근
@@ -49,12 +61,18 @@ myMapPage release
 지도 하단에 엑셀 형식으로? 일단 데이터 정렬
 
 
-고민중인 부분
-
 소재지 필요 있나없나, 일단 소재지가 등록 안된 데이터도 많아서 굳이 의미가 있나 싶음
 그리고 월세전세 둘중에 하나만 표현해주는게 더 나을 것 같기도하다는 생각이 듭니다.
 
 좋은건 월세 매물보기랑 전세 매물보기를 따로 설정해서 두 버전으로 데이터를 확인할 수 있게 해주면 제일 좋겠지만 지금 하나도 막막한데 일단 하나라도 되게 해야지
 그냥 문자중에 쉼표가 있으면 강제로 쉼표를 삭제?
 그 후에 처리가 더 쉬울것같긴해
+
+
+# 5. REFERENCE
+- https://www.selenium.dev/documentation/
+- https://guide.ncloud-docs.com/docs/ko/maps-web-sdk
+- https://guide.ncloud-docs.com/docs/ko/maps-reversegeocoding-api
+- https://getbootstrap.kr/docs/5.3/content/
+
 
